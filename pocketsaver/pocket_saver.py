@@ -37,14 +37,14 @@ class PocketSaver:
         webbrowser.open_new_tab(
             f"https://getpocket.com/auth/authorize?request_token={oauth_token}&redirect_uri={REDIRECT_URI}")
 
-        for i in range(100):
+        for i in range(3):
             time.sleep(5)
             try:
                 auth_response = requests.post(f"https://getpocket.com/v3/oauth/authorize",
                                               headers={"X-Accept": "application/json"},
                                               params={"consumer_key": self.pocket_key, "code": oauth_token})
-                print("Success!")
                 auth_response.raise_for_status()
+                print("Success!")
                 auth_json = json.loads(auth_response.text)
                 self._access_token = auth_json["access_token"]
                 return
