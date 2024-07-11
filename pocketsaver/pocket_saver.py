@@ -43,6 +43,7 @@ class PocketSaver:
                 auth_response = requests.post(f"https://getpocket.com/v3/oauth/authorize",
                                               headers={"X-Accept": "application/json"},
                                               params={"consumer_key": self.pocket_key, "code": oauth_token})
+                print(f"Auth response: HTTP {auth_response.status_code}")
                 auth_response.raise_for_status()
                 print("Success!")
                 auth_json = json.loads(auth_response.text)
